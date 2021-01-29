@@ -27,18 +27,6 @@ export default class CoffeeStatus extends HTMLElement {
         return this._temperature;
     }
 
-    setLevel(newLevel) {
-        this._level = newLevel;
-    }
-
-    setPreparedAt(newPreparedAt) {
-        this._preparedAt = newPreparedAt;
-    }
-
-    setTemperature(newtemperature) {
-        this._temperature = newtemperature;
-    }
-
     render() {
         this.shadowObj.innerHTML = this._getTemplate();
     };
