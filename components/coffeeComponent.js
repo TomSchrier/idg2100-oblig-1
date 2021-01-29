@@ -59,13 +59,14 @@ export default class CoffeeStatus extends HTMLElement {
                 padding: 1%;
                 margin-bottom: 1%;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                background-color: #b08f70;
             }
         </style>
         <div>
             <img src="assets/coffee.jpg"></span>
             <p><b>Coffee level</b>: ${this.getLevel()}</p>
             <p><b>Prepared at</b>: ${this.getPreparedAt()}</p>
-            <p><b>temperature</b>: ${this.getTemperature()}</p>
+            <p><b>Temperature</b>: ${this.getTemperature()}</p>
         </div>
         `;
         return template;
