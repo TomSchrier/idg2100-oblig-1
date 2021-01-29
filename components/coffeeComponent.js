@@ -5,19 +5,42 @@ export default class CoffeeStatus extends HTMLElement {
 
         //We store the shadowRoot as a class property to use it
         this.shadowObj = this.attachShadow({ mode: 'open' });
-        
+
         this.metadata = {
-            level: 'level-string',
-            prepared_at: 'level-string',
-            temprature: 'temprature-string'
+            level: 'Full',
+            preparedAt: '29 jan 08:02',
+            temperature: 'hot',
         };
 
         this.render();
     };
 
+    getLevel() {
+        return this.metadata.level;
+    };
+
+    getPreparedAt() {
+        return this.metadata.preparedAt;
+    };
+
+    getTemperature() {
+        return this.metadata.temperature;
+    }
+
+    setLevel(newLevel) {
+        this.metadata.level = newLevel;
+    }
+
+    setPreparedAt(newPreparedAt) {
+        this.metadata.preparedAt = newPreparedAt;
+    }
+
+    setTemperature(newtemperature) {
+        this.metadata.temperature = newtemperature;
+    }
+
     render() {
         this.shadowObj.innerHTML = this._getTemplate();
-        console.log(this.metadata);
     };
 
     _getTemplate() {
@@ -33,15 +56,16 @@ export default class CoffeeStatus extends HTMLElement {
             }
             div{
                 border-style: solid;
-                padding: 3%;
+                padding: 1%;
                 margin-bottom: 1%;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             }
         </style>
         <div>
             <img src="assets/coffee.jpg"></span>
-            <p><b>Coffee level</b>: ${this.metadata.level}</p>
-            <p><b>Prepared at</b>: ${this.metadata.prepared_at}</p>
-            <p><b>Temprature</b>: ${this.metadata.temprature} °C</p>
+            <p><b>Coffee level</b>: ${this.getLevel()}</p>
+            <p><b>Prepared at</b>: ${this.getPreparedAt()}</p>
+            <p><b>temperature</b>: ${this.getTemperature()}</p>
         </div>
         `;
         return template;
