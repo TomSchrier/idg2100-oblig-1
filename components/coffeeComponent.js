@@ -6,37 +6,37 @@ export default class CoffeeStatus extends HTMLElement {
         //We store the shadowRoot as a class property to use it
         this.shadowObj = this.attachShadow({ mode: 'open' });
 
-        this.metadata = {
-            level: 'Full',
-            preparedAt: '29 jan 08:02',
-            temperature: 'hot',
-        };
+        this._level = 'Full';
+
+        this._preparedAt = '29 jan 08:02';
+
+        this._temperature = 'hot';
 
         this.render();
     };
 
     getLevel() {
-        return this.metadata.level;
+        return this._level;
     };
 
     getPreparedAt() {
-        return this.metadata.preparedAt;
+        return this._preparedAt;
     };
 
     getTemperature() {
-        return this.metadata.temperature;
+        return this._temperature;
     }
 
     setLevel(newLevel) {
-        this.metadata.level = newLevel;
+        this._level = newLevel;
     }
 
     setPreparedAt(newPreparedAt) {
-        this.metadata.preparedAt = newPreparedAt;
+        this._preparedAt = newPreparedAt;
     }
 
     setTemperature(newtemperature) {
-        this.metadata.temperature = newtemperature;
+        this._temperature = newtemperature;
     }
 
     render() {
