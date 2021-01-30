@@ -10,19 +10,35 @@
     <title>NTNU Design – Coffee Status</title>
 </head>
 
-<body>
+<body onload="init()">
     <h1>Coffee Status</h1>
 
-    <coffee-status></coffee-status>
-    <coffee-status></coffee-status>
+    <div class="container">
+        <coffee-status></coffee-status>
+        <coffee-status></coffee-status>
+        <coffee-status></coffee-status>
+        <coffee-status></coffee-status>
+    </div>
 
     <script>
-        fetch('coffee.json')
-            .then(response => response.json())
-            .then(JSONdata => {
-                // Do something
-                console.log(JSONdata);
-            });
+        
+        //ENDRE NAVN
+        function init() {
+            fetch('coffee.json')
+                .then(response => response.json())
+                .then(JSONdata => {
+                    let components = document.getElementsByTagName("coffee-status");
+
+                    for (let index = 0; index < JSONdata.length; index++) {
+                        console.log(components[index])
+                        if(components[index]){
+                            components[index].setValues(JSONdata[index].level, new Date(JSONdata[index].preparedAt), JSONdata[index].temperature);
+                        } else {
+                            break;
+                        };
+                    };
+                });
+        }
 
     </script>
     <script type="module" src="components/coffeeComponent.js"></script>
