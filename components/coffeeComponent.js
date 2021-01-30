@@ -6,40 +6,52 @@ export default class CoffeeStatus extends HTMLElement {
         //We store the shadowRoot as a class property to use it
         this.shadowObj = this.attachShadow({ mode: 'open' });
 
-        this._level = '';
+        this._level;
 
-        this._preparedAt = '';
+        this._preparedAt;
 
-        this._temperature = '';
+        this._temperature;
 
         this.render();
     };
 
     getLevel() {
-        return this._level;
+        if (this._level === 0) {
+            return 'empty';
+        } else if (this._level <= 0.5) {
+            return 'almost empty';
+        } else if (this._level <= 1.1) {
+            return 'almost full';
+        } else if (this._level <= 2.2) {
+            return 'full';
+        };
     };
 
     getPreparedAt() {
-        return this._preparedAt;
+        return new Date(this._preparedAt).toUTCString();
     };
 
     getTemperature() {
-        return this._temperature;
-    }
+        if (this._temperature >= 54) {
+            return `${this._temperature} ℃ – hot`
+        } else {
+            return `${this._temperature} ℃ – cold`
+        };
+    };
 
-    setLevel(newLevel){
+    setLevel(newLevel) {
         this._level = newLevel;
     };
 
-    setPreparedAt(newPreparedAt){
+    setPreparedAt(newPreparedAt) {
         this._preparedAt = newPreparedAt;
     };
 
-    setTemperature(newTemperature){
+    setTemperature(newTemperature) {
         this._temperature = newTemperature;
     };
 
-    setValues(newLevel, newPreparedAt, newTemperature){
+    setValues(newLevel, newPreparedAt, newTemperature) {
         this.setLevel(newLevel);
         this.setPreparedAt(newPreparedAt);
         this.setTemperature(newTemperature);
@@ -57,9 +69,11 @@ export default class CoffeeStatus extends HTMLElement {
                 font-size: 1.5em;
             }
             img {
-                max-width: 100%;
+                max-width: 50%;
                 min-width: 100px;
                 height: auto;
+                margin: auto;
+                display: block;
             }
             div {
                 border-style: solid;
@@ -71,10 +85,10 @@ export default class CoffeeStatus extends HTMLElement {
             }
         </style>
         <div>
-            <img src="assets/coffee.jpg"></span>
+            <img src="assets/${this.getLevel().replace(" ", "-")}.png"></span>
             <p>Coffee level: ${this.getLevel()}</p>
             <p>Prepared at: ${this.getPreparedAt()}</p>
-            <p>Temperature: ${this.getTemperature()} ℃</p>
+            <p>Temperature: ${this.getTemperature()}</p>
         </div>
         `;
         return template;
