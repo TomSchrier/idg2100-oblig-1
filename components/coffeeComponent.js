@@ -61,29 +61,7 @@ export default class CoffeeStatus extends HTMLElement {
 
     _getTemplate() {
         const template = `
-        <style>
-            p {
-                font-size: 1.5em;
-            }
-            img {
-                max-width: 50%;
-                min-width: 100px;
-                height: auto;
-                margin: auto;
-                display: block;
-            }
-            div {
-                border-style: solid;
-                padding: 3%;
-                margin-bottom: 1%;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                background-color: #b08f70;
-                border-radius: 7px;
-            }
-            .bold-text {
-                font-weight: bold;
-            }
-        </style>
+        <link rel="stylesheet" href="../styles.css">
         <div>
             <img src="assets/${this.getLevel().replace(" ", "-")}.png"></span>
             <p><span class="bold-text">Coffee level</span>: ${this.getLevel()}</p>
