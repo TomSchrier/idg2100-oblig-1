@@ -21,8 +21,6 @@
     </div>
 
     <script>
-        
-        //ENDRE NAVN
         function init() {
             fetch('coffee.json')
                 .then(response => response.json())
@@ -30,15 +28,14 @@
                     let components = document.getElementsByTagName("coffee-status");
 
                     for (let index = 0; index < JSONdata.length; index++) {
-                        console.log(components[index])
-                        if(components[index]){
+                        if (components[index]) {
                             components[index].setValues(JSONdata[index].level, JSONdata[index].preparedAt, JSONdata[index].temperature);
                         } else {
                             break;
                         };
                     };
                 });
-        }
+        };
 
     </script>
     <script type="module" src="components/coffeeComponent.js"></script>

@@ -7,9 +7,7 @@ export default class CoffeeStatus extends HTMLElement {
         this.shadowObj = this.attachShadow({ mode: 'open' });
 
         this._level;
-
         this._preparedAt;
-
         this._temperature;
 
         this.render();
