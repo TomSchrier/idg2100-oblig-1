@@ -1,7 +1,6 @@
 export default class CoffeeStatus extends HTMLElement {
     constructor() {
         super();
-        // Element functionality written in here
 
         //We store the shadowRoot as a class property to use it
         this.shadowObj = this.attachShadow({ mode: 'open' });
@@ -81,12 +80,15 @@ export default class CoffeeStatus extends HTMLElement {
                 background-color: #b08f70;
                 border-radius: 7px;
             }
+            .bold-text {
+                font-weight: bold;
+            }
         </style>
         <div>
             <img src="assets/${this.getLevel().replace(" ", "-")}.png"></span>
-            <p>Coffee level: ${this.getLevel()}</p>
-            <p>Prepared at: ${this.getPreparedAt()}</p>
-            <p>Temperature: ${this.getTemperature()}</p>
+            <p><span class="bold-text">Coffee level</span>: ${this.getLevel()}</p>
+            <p><span class="bold-text">Prepared at</span>: ${this.getPreparedAt()}</p>
+            <p><span class="bold-text">Temperature</span>: ${this.getTemperature()}</p>
         </div>
         `;
         return template;
