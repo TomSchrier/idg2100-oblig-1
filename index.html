@@ -5,16 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕️</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕️</text></svg>">
     <title>NTNU Design – Coffee Status</title>
 </head>
 
-<body>
+<body onload="init()">
     <h1>Coffee Status</h1>
 
-    <coffee-status></coffee-status>
-    <coffee-status></coffee-status>
+    <div class="container">
+        <coffee-status></coffee-status>
+        <coffee-status></coffee-status>
+        <coffee-status></coffee-status>
+        <coffee-status></coffee-status>
+    </div>
 
+    <script>
+        
+        //ENDRE NAVN
+        function init() {
+            fetch('coffee.json')
+                .then(response => response.json())
+                .then(JSONdata => {
+                    let components = document.getElementsByTagName("coffee-status");
+
+                    for (let index = 0; index < JSONdata.length; index++) {
+                        console.log(components[index])
+                        if(components[index]){
+                            components[index].setValues(JSONdata[index].level, new Date(JSONdata[index].preparedAt), JSONdata[index].temperature);
+                        } else {
+                            break;
+                        };
+                    };
+                });
+        }
+
+    </script>
     <script type="module" src="components/coffeeComponent.js"></script>
 </body>
 

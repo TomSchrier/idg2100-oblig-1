@@ -1,0 +1,20 @@
+[{
+    "level": 1.1,
+    "preparedAt": "2021-01-29T07:15:00+0100",
+    "temperature": 85
+},
+{
+    "level": 2.2,
+    "preparedAt": "2021-01-29T13:45:00+0100",
+    "temperature": 57
+},
+{
+    "level": 0.7,
+    "preparedAt": "2021-01-29T06:33:00+0100",
+    "temperature": 24
+},
+{
+    "level": 0.1,
+    "preparedAt": "2021-01-29T16:22:00+0100",
+    "temperature": 95
+}]

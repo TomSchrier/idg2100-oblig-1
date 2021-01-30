@@ -6,11 +6,11 @@ export default class CoffeeStatus extends HTMLElement {
         //We store the shadowRoot as a class property to use it
         this.shadowObj = this.attachShadow({ mode: 'open' });
 
-        this._level = 'Full';
+        this._level = '';
 
-        this._preparedAt = '29 jan 08:02';
+        this._preparedAt = '';
 
-        this._temperature = 'hot';
+        this._temperature = '';
 
         this.render();
     };
@@ -27,16 +27,23 @@ export default class CoffeeStatus extends HTMLElement {
         return this._temperature;
     }
 
-    setLevel(newLevel) {
+    setLevel(newLevel){
         this._level = newLevel;
-    }
+    };
 
-    setPreparedAt(newPreparedAt) {
+    setPreparedAt(newPreparedAt){
         this._preparedAt = newPreparedAt;
-    }
+    };
 
-    setTemperature(newtemperature) {
-        this._temperature = newtemperature;
+    setTemperature(newTemperature){
+        this._temperature = newTemperature;
+    };
+
+    setValues(newLevel, newPreparedAt, newTemperature){
+        this.setLevel(newLevel);
+        this.setPreparedAt(newPreparedAt);
+        this.setTemperature(newTemperature);
+        this.render();
     }
 
     render() {
@@ -54,19 +61,20 @@ export default class CoffeeStatus extends HTMLElement {
                 min-width: 100px;
                 height: auto;
             }
-            div{
+            div {
                 border-style: solid;
-                padding: 1%;
+                padding: 3%;
                 margin-bottom: 1%;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 background-color: #b08f70;
+                border-radius: 7px;
             }
         </style>
         <div>
             <img src="assets/coffee.jpg"></span>
-            <p><b>Coffee level</b>: ${this.getLevel()}</p>
-            <p><b>Prepared at</b>: ${this.getPreparedAt()}</p>
-            <p><b>Temperature</b>: ${this.getTemperature()}</p>
+            <p>Coffee level: ${this.getLevel()}</p>
+            <p>Prepared at: ${this.getPreparedAt()}</p>
+            <p>Temperature: ${this.getTemperature()} ℃</p>
         </div>
         `;
         return template;

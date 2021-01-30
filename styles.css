@@ -4,3 +4,9 @@ body {
     margin-left: 5%;
     margin-right: 5%;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1em;
+}
