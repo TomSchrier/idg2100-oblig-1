@@ -9,13 +9,9 @@ export default class CoffeeStatus extends HTMLElement {
         this._preparedAt;
         this._temperature;
         this._timesUpdated = 0;
-
-        //populating the shadowDOM with the template (commented out -> moved to setValues())
-        //fixed -> ${this.getLevel() is undefined error.
-        //fixed -> showing undefined values.
-        //this.render();
     };
 
+    //generates text based on level
     getLevel() {
         if (this._level === 0) {
             return 'empty';
@@ -103,8 +99,6 @@ export default class CoffeeStatus extends HTMLElement {
     };
 
     _setEventListeners() {
-        console.log("in _setEventListeners");
-
         this.shadowRoot.querySelector("button").onclick = (evt) => {
 
             this._timesUpdated++;
@@ -113,7 +107,7 @@ export default class CoffeeStatus extends HTMLElement {
             this.dispatchEvent(new CustomEvent("updated", {
                 detail: {
                     timesUpdated: this._timesUpdated,
-                    preparedAt: this._preparedAt
+                    preparedAt: this.getPreparedAt()
                 }
             }));
         };
@@ -122,7 +116,7 @@ export default class CoffeeStatus extends HTMLElement {
         this.addEventListener("updated", (evt) => {
             
             //we can see that the event is unique to each button as the preparedAt matches its element
-            console.log(`The coffee prepared at ${evt.detail.preparedAt} has been updated ${evt.detail.timesUpdated} times now.`);
+            console.log(`The coffee prepared at ${evt.detail.preparedAt} has been updated ${evt.detail.timesUpdated} time(s) now.`);
         });
     };
 };
