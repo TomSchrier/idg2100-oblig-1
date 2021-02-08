@@ -8,6 +8,7 @@ export default class CoffeeStatus extends HTMLElement {
         this._level;
         this._preparedAt;
         this._temperature;
+        this._timesUpdated = 0;
 
         //populating the shadowDOM with the template (commented out -> moved to setValues())
         //fixed -> ${this.getLevel() is undefined error.
@@ -95,7 +96,7 @@ export default class CoffeeStatus extends HTMLElement {
             <p><span class="bold-text">Coffee level</span>: ${this.getLevel()}</p>
             <p><span class="bold-text">Prepared at</span>: ${this.getPreparedAt()}</p>
             <p><span class="bold-text">Temperature</span>: ${this.getTemperature()}</p>
-            <button id="refresh-button" type="button">Refresh</button>
+            <button type="button">Refresh</button>
         </div>
         `;
         return template;
@@ -103,8 +104,25 @@ export default class CoffeeStatus extends HTMLElement {
 
     _setEventListeners() {
         console.log("in _setEventListeners");
-        this.shadowRoot.getElementById("refresh-button").addEventListener("click", (e) => {
-            console.log("in _setEventListeners body");
+
+        this.shadowRoot.querySelector("button").onclick = (evt) => {
+
+            this._timesUpdated++;
+
+            //create custom event called "updated"
+            this.dispatchEvent(new CustomEvent("updated", {
+                detail: {
+                    timesUpdated: this._timesUpdated,
+                    preparedAt: this._preparedAt
+                }
+            }));
+        };
+
+        //add custom event called "updated" to our button
+        this.addEventListener("updated", (evt) => {
+            
+            //we can see that the event is unique to each button as the preparedAt matches its element
+            console.log(`The coffee prepared at ${evt.detail.preparedAt} has been updated ${evt.detail.timesUpdated} times now.`);
         });
     };
 };
