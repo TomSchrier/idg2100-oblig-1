@@ -36,6 +36,10 @@ export default class CoffeeStatus extends HTMLElement {
         };
     };
 
+    getTimesUpdated(){
+        return this._timesUpdated;
+    }
+
     setLevel(newLevel) {
         this._level = newLevel;
     };
@@ -106,7 +110,7 @@ export default class CoffeeStatus extends HTMLElement {
             //create custom event called "updated"
             this.dispatchEvent(new CustomEvent("updated", {
                 detail: {
-                    timesUpdated: this._timesUpdated,
+                    timesUpdated: this.getTimesUpdated(),
                     preparedAt: this.getPreparedAt()
                 }
             }));
