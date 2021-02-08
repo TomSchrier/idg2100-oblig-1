@@ -9,8 +9,10 @@ export default class CoffeeStatus extends HTMLElement {
         this._preparedAt;
         this._temperature;
 
-        //populating the shadowDOM with the template
-        this.render();
+        //populating the shadowDOM with the template (commented out -> moved to setValues())
+        //fixed -> ${this.getLevel() is undefined error.
+        //fixed -> showing undefined values.
+        //this.render();
     };
 
     getLevel() {
@@ -53,11 +55,14 @@ export default class CoffeeStatus extends HTMLElement {
         this.setLevel(newLevel);
         this.setPreparedAt(newPreparedAt);
         this.setTemperature(newTemperature);
+
+        //populating the shadowDOM with the template after properties are populated
         this.render();
     }
 
     render() {
         this.shadowObj.innerHTML = this._getTemplate();
+        this._setEventListeners();
     };
 
     _getTemplate() {
@@ -86,7 +91,7 @@ export default class CoffeeStatus extends HTMLElement {
             }
         </style>
         <div>
-            <img src="assets/full.png"></span>
+            <img src="assets/${this.getLevel().replace(" ", "-")}.png"></span>
             <p><span class="bold-text">Coffee level</span>: ${this.getLevel()}</p>
             <p><span class="bold-text">Prepared at</span>: ${this.getPreparedAt()}</p>
             <p><span class="bold-text">Temperature</span>: ${this.getTemperature()}</p>
@@ -96,7 +101,12 @@ export default class CoffeeStatus extends HTMLElement {
         return template;
     };
 
-    //${this.getLevel().replace(" ", "-")}
+    _setEventListeners() {
+        console.log("in _setEventListeners");
+        this.shadowRoot.getElementById("refresh-button").addEventListener("click", (e) => {
+            console.log("in _setEventListeners body");
+        });
+    };
 };
 
 customElements.define('coffee-status', CoffeeStatus);
