@@ -9,6 +9,7 @@ export default class CoffeeStatus extends HTMLElement {
         this._preparedAt;
         this._temperature;
 
+        //populating the shadowDOM with the template
         this.render();
     };
 
@@ -61,16 +62,41 @@ export default class CoffeeStatus extends HTMLElement {
 
     _getTemplate() {
         const template = `
-        <link rel="stylesheet" href="../styles.css">
+        <style>
+            p {
+                font-size: 1.5em;
+            }
+            img {
+                max-width: 33%;
+                min-width: 100px;
+                height: auto;
+                margin: auto;
+                display: block;
+            }
+            div {
+                border-style: solid;
+                padding: 3%;
+                margin-bottom: 1%;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                background-color: #b08f70;
+                border-radius: 7px;
+            }
+            .bold-text {
+                font-weight: bold;
+            }
+        </style>
         <div>
-            <img src="assets/${this.getLevel().replace(" ", "-")}.png"></span>
+            <img src="assets/full.png"></span>
             <p><span class="bold-text">Coffee level</span>: ${this.getLevel()}</p>
             <p><span class="bold-text">Prepared at</span>: ${this.getPreparedAt()}</p>
             <p><span class="bold-text">Temperature</span>: ${this.getTemperature()}</p>
+            <button id="refresh-button" type="button">Refresh</button>
         </div>
         `;
         return template;
     };
+
+    //${this.getLevel().replace(" ", "-")}
 };
 
-customElements.define("coffee-status", CoffeeStatus);
+customElements.define('coffee-status', CoffeeStatus);
