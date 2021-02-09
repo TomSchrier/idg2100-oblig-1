@@ -1,3 +1,5 @@
+/*Loop through our JSON file and assign the value to
+its corresponding web component with the .setValues method*/
 function getJSON() {
     fetch('coffee.json')
     .then(response => response.json())

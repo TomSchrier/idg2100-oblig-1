@@ -28,6 +28,7 @@ export default class CoffeeStatus extends HTMLElement {
         return new Date(this._preparedAt).toUTCString();
     };
 
+    //generates text based on temperature
     getTemperature() {
         if (this._temperature >= 54) {
             return `${this._temperature} ℃ – hot`
@@ -52,6 +53,7 @@ export default class CoffeeStatus extends HTMLElement {
         this._temperature = newTemperature;
     };
 
+    //a collection of setters that is used when reading the JSON in getJSON.js
     setValues(newLevel, newPreparedAt, newTemperature) {
         this.setLevel(newLevel);
         this.setPreparedAt(newPreparedAt);
@@ -66,6 +68,8 @@ export default class CoffeeStatus extends HTMLElement {
         this._setEventListeners();
     };
 
+    /*in the template, we use the status to decide what image to display,
+    the image filename is the same as the status.*/
     _getTemplate() {
         const template = `
         <style>
@@ -107,7 +111,9 @@ export default class CoffeeStatus extends HTMLElement {
 
             this._timesUpdated++;
 
-            //create custom event called "updated"
+            /*create custom event called "updated".
+            The event listener counts how many times a button 
+            has been clicked -> representing how many times it is "updated" in this project*/
             this.dispatchEvent(new CustomEvent("updated", {
                 detail: {
                     timesUpdated: this.getTimesUpdated(),
