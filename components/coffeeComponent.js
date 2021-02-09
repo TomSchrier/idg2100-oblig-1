@@ -8,6 +8,9 @@ export default class CoffeeStatus extends HTMLElement {
         this._level;
         this._preparedAt;
         this._temperature;
+
+        /*used for children -> parent communication - this vakue is never displayed to the user
+        only in the console*/
         this._timesUpdated = 0;
     };
 
@@ -63,13 +66,14 @@ export default class CoffeeStatus extends HTMLElement {
         this.render();
     }
 
+    //fill the shadowDOM with the HTML template from _getTemplate().
     render() {
         this.shadowObj.innerHTML = this._getTemplate();
         this._setEventListeners();
     };
 
     /*in the template, we use the status to decide what image to display,
-    the image filename is the same as the status.*/
+    the image filename is the same as the status. (line 99)*/
     _getTemplate() {
         const template = `
         <style>
